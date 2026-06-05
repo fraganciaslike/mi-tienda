@@ -1134,47 +1134,49 @@ async function cargarProductos() {
     const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtH8U-YBPAs8iE9IrHQCpDr6gDxDezzkhKVfXqxxNzRn2pcHyrxKfNW4lIfoIig-8KlLtfstKF31Eo/pub?gid=1201638382&single=true&output=csv';
 
     try {
-        const res = await fetch(SPREADSHEET_URL);
-        const data = await res.text();
-        const filas = data.split('\n').slice(1);
-        const contenedor = document.getElementById('lista-productos');
-        contenedor.innerHTML = ''; // Limpiamos el texto "Cargando..."
+    const res = await fetch(SPREADSHEET_URL);
+    const data = await res.text();
+    const filas = data.split('\n').slice(1);
+    const contenedor = document.getElementById('lista-productos');
+    contenedor.innerHTML = ''; 
 
-        filas.forEach(fila => {
-            if(!fila.trim()) return;
-            const c = fila.split(',');
-            
-            // ASIGNACIÓN SEGÚN TU HOJA DE CÁLCULO:
-            const nombre = c[0];
-            const genero = c[1];
-            const notas = c[2];
-            const precio = parseInt(c[4]) || 0; // Columna E
-            const stock = parseInt(c[5]) || 0;  // Columna F
-            const imagen = c[6];               // Columna G
+    filas.forEach(fila => {
+        if(!fila.trim()) return;
+        const c = fila.split(',');
+        
+        // Asignación de variables
+        const nombre = c[1];
+        const genero = c[2];
+        const notas = c[3];
+        const precio = parseInt(c[4]) || 0;
+        const stock = parseInt(c[5]) || 0;
+        const imagen = c[7];
 
-            const div = document.createElement('div');
-            div.className = 'producto';
-            div.innerHTML = `
-                <img src="${imagen}" alt="${nombre}" loading="lazy">
-                <div class="info">
-                    <div class="genero-tag"><span>${genero}</span> <span class="ml-tag">100ml</span></div>
-                    <h2>${nombre}</h2>
-                    <p class="notas-olfativas">${notas}</p>
-                    <p class="precio">$${precio.toLocaleString('es-AR')}</p>
-                    <div class="btn-box">
-                        <button class="btn btn-carrito" 
-                                ${stock <= 0 ? 'disabled style="background:#555"' : ''}
-                                onclick="agregarAlCarrito('${nombre}', ${precio}, this)">
-                            ${stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
-                        </button>
-                    </div>
+        // EL DIV DEBE CREARSE AQUÍ ADENTRO PARA CADA PRODUCTO
+        const div = document.createElement('div');
+        div.className = 'producto';
+        div.innerHTML = `
+            <img src="${imagen}" alt="${nombre}" loading="lazy">
+            <div class="info">
+                <div class="genero-tag"><span>${genero}</span> <span class="ml-tag">100ml</span></div>
+                <h2>${nombre}</h2>
+                <p class="notas-olfativas">${notas}</p>
+                <p class="precio">$${precio.toLocaleString('es-AR')}</p>
+                <div class="btn-box">
+                    <button class="btn btn-carrito" 
+                            ${stock <= 0 ? 'disabled style="background:#555"' : ''}
+                            onclick="agregarAlCarrito('${nombre.replace(/'/g, "\\'")}', ${precio}, this)">
+                        ${stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
+                    </button>
                 </div>
-            `;
-            contenedor.appendChild(div);
-        });
-    } catch(err) {
-        console.error("Error al cargar:", err);
-    }
+            </div>
+        `;
+        contenedor.appendChild(div);
+    });
+
+} catch(err) {
+    console.error("Error al cargar:", err);
+}
 }
     
     // Llamar a la función al cargar la página
