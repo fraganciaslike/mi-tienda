@@ -1127,59 +1127,57 @@
     let filtroGeneroActual = 'todos';
 </script>
 <script>
+    // Definir la variable una sola vez
     const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtH8U-YBPAs8iE9IrHQCpDr6gDxDezzkhKVfXqxxNzRn2pcHyrxKfNW4lIfoIig-8KlLtfstKF31Eo/pub?gid=1201638382&single=true&output=csv';
 
-async function cargarProductos() {
-    // Asegúrate de que esta URL sea la correcta y esté publicada
-    const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtH8U-YBPAs8iE9IrHQCpDr6gDxDezzkhKVfXqxxNzRn2pcHyrxKfNW4lIfoIig-8KlLtfstKF31Eo/pub?gid=1201638382&single=true&output=csv';
+    async function cargarProductos() {
+        try {
+            const res = await fetch(SPREADSHEET_URL);
+            const data = await res.text();
+            const filas = data.split('\n').slice(1);
+            const contenedor = document.getElementById('lista-productos');
+            
+            if (!contenedor) return;
+            contenedor.innerHTML = ''; 
 
-    try {
-    const res = await fetch(SPREADSHEET_URL);
-    const data = await res.text();
-    const filas = data.split('\n').slice(1);
-    const contenedor = document.getElementById('lista-productos');
-    contenedor.innerHTML = ''; 
+            filas.forEach(fila => {
+                if(!fila.trim()) return;
+                const c = fila.split(',');
+                
+                // Mapeo corregido según tu imagen (Columna B es índice 1)
+                const nombre = c[1];   
+                const genero = c[2];   
+                const notas = c[3];    
+                const precio = parseInt(c[4]) || 0; 
+                const stock = parseInt(c[5]) || 0;  
+                const imagen = c[7];   
 
-    filas.forEach(fila => {
-        if(!fila.trim()) return;
-        const c = fila.split(',');
-        
-        // Asignación de variables
-        const nombre = c[1];
-        const genero = c[2];
-        const notas = c[3];
-        const precio = parseInt(c[4]) || 0;
-        const stock = parseInt(c[5]) || 0;
-        const imagen = c[7];
+                const div = document.createElement('div');
+                div.className = 'producto';
+                div.innerHTML = `
+                    <img src="${imagen}" alt="${nombre}" loading="lazy">
+                    <div class="info">
+                        <div class="genero-tag"><span>${genero}</span> <span class="ml-tag">100ml</span></div>
+                        <h2>${nombre}</h2>
+                        <p class="notas-olfativas">${notas}</p>
+                        <p class="precio">$${precio.toLocaleString('es-AR')}</p>
+                        <div class="btn-box">
+                            <button class="btn btn-carrito" 
+                                    ${stock <= 0 ? 'disabled style="background:#555"' : ''}
+                                    onclick="agregarAlCarrito('${nombre}', ${precio}, this)">
+                                ${stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                contenedor.appendChild(div);
+            });
+        } catch(err) {
+            console.error("Error al cargar productos:", err);
+        }
+    }
 
-        // EL DIV DEBE CREARSE AQUÍ ADENTRO PARA CADA PRODUCTO
-        const div = document.createElement('div');
-        div.className = 'producto';
-        div.innerHTML = `
-            <img src="${imagen}" alt="${nombre}" loading="lazy">
-            <div class="info">
-                <div class="genero-tag"><span>${genero}</span> <span class="ml-tag">100ml</span></div>
-                <h2>${nombre}</h2>
-                <p class="notas-olfativas">${notas}</p>
-                <p class="precio">$${precio.toLocaleString('es-AR')}</p>
-                <div class="btn-box">
-                    <button class="btn btn-carrito" 
-                            ${stock <= 0 ? 'disabled style="background:#555"' : ''}
-                            onclick="agregarAlCarrito('${nombre.replace(/'/g, "\\'")}', ${precio}, this)">
-                        ${stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
-                    </button>
-                </div>
-            </div>
-        `;
-        contenedor.appendChild(div);
-    });
-
-} catch(err) {
-    console.error("Error al cargar:", err);
-}
-}
-    
-    // Llamar a la función al cargar la página
+    // Inicializar al cargar
     document.addEventListener('DOMContentLoaded', cargarProductos);
 
 </script>
