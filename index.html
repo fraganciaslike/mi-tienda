@@ -1158,42 +1158,41 @@
 <script>
     const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtH8U-YBPAs8iE9IrHQCpDr6gDxDezzkhKVfXqxxNzRn2pcHyrxKfNW4lIfoIig-8KlLtfstKF31Eo/pub?gid=1201638382&single=true&output=csv';
 
-  async function cargarProductos() {
+async function cargarProductos() {
     const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtH8U-YBPAs8iE9IrHQCpDr6gDxDezzkhKVfXqxxNzRn2pcHyrxKfNW4lIfoIig-8KlLtfstKF31Eo/pub?gid=1201638382&single=true&output=csv';
 
     try {
         const res = await fetch(SPREADSHEET_URL);
         const data = await res.text();
-        // Usamos una expresión regular para manejar comas dentro de textos (por si tus notas tienen comas)
         const filas = data.split('\n').slice(1);
         const contenedor = document.getElementById('lista-productos');
         contenedor.innerHTML = '';
 
         filas.forEach(fila => {
             if(!fila.trim()) return;
-            
-            // Separamos por coma, pero asegurando que extraemos valores limpios
             const c = fila.split(',');
             
-            // LIMPIEZA DE DATOS:
-            // .replace(/[^\d]/g, '') quita todo lo que no sea número (símbolos $, puntos, etc)
-            const precio = parseInt(c[1].replace(/[^\d]/g, '')) || 0;
-            const stock = parseInt(c[6].replace(/[^\d]/g, '')) || 0;
+            // AJUSTE DE ÍNDICES SEGÚN TU HOJA:
+            const nombre = c[0];
+            const genero = c[1];
+            const notas = c[2];
+            const precio = parseInt(c[4]) || 0; // Columna E
+            const stock = parseInt(c[5]) || 0;  // Columna F
+            const imagen = c[6];               // Columna G
 
             const div = document.createElement('div');
             div.className = 'producto';
             div.innerHTML = `
-                <img src="${c[4]}" alt="${c[0]}" loading="lazy">
+                <img src="${imagen}" alt="${nombre}" loading="lazy">
                 <div class="info">
-                    ${c[5] ? `<span class="badge">${c[5]}</span>` : ''}
-                    <div class="genero-tag"><span>${c[2]}</span> <span class="ml-tag">100ml</span></div>
-                    <h2>${c[0]}</h2>
-                    <p class="notas-olfativas">${c[3]}</p>
+                    <div class="genero-tag"><span>${genero}</span> <span class="ml-tag">100ml</span></div>
+                    <h2>${nombre}</h2>
+                    <p class="notas-olfativas">${notas}</p>
                     <p class="precio">$${precio.toLocaleString('es-AR')}</p>
                     <div class="btn-box">
                         <button class="btn btn-carrito" 
                                 ${stock <= 0 ? 'disabled style="background:#555"' : ''}
-                                onclick="agregarAlCarrito('${c[0]}', ${precio}, this)">
+                                onclick="agregarAlCarrito('${nombre}', ${precio}, this)">
                             ${stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
                         </button>
                     </div>
