@@ -24,7 +24,7 @@
             letter-spacing: 1px;
         }
 
-        /* BARRA DE NAVEGACIÓN (SIEMPRE FIJA CON MENÚ HAMBURGUESA) */
+        /* BARRA DE NAVEGACIÓN */
         .navbar {
             background: #000;
             display: flex;
@@ -39,12 +39,15 @@
             width: 100%;
         }
         .logo {
-            color: #C8A45D;
-            font-size: 26px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             flex-grow: 1;
+        }
+        .logo img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
         }
         .menu-container {
             display: flex;
@@ -206,11 +209,21 @@
             transform: translateY(-5px);
             border-color: #C8A45D;
         }
+        
+        /* EFECTO DE CARGA INTELIGENTE PARA IMÁGENES */
         .producto img {
             width: 100%;
             height: 280px;
             object-fit: cover;
+            background: linear-gradient(90deg, #1b1b1b 25%, #252525 50%, #1b1b1b 75%);
+            background-size: 200% 100%;
+            animation: pulsoCarga 1.5s infinite linear;
         }
+        @keyframes pulsoCarga {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
         .info {
             padding: 20px;
             flex: 1;
@@ -227,6 +240,19 @@
             color: #888;
             margin-bottom: 10px;
             text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+        }
+        .ml-tag {
+            color: #C8A45D;
+            font-weight: bold;
+        }
+        .notas-olfativas {
+            font-size: 13px;
+            color: #aaa;
+            margin: 5px 0 10px 0;
+            line-height: 1.4;
+            font-style: italic;
         }
         .precio {
             font-size: 24px;
@@ -250,6 +276,7 @@
             font-size: 15px;
             width: 100%;
             box-sizing: border-box;
+            transition: background-color 0.2s, color 0.2s;
         }
         .btn-carrito {
             background: #C8A45D;
@@ -258,6 +285,12 @@
         .btn-carrito:hover {
             background: #b3904b;
         }
+        /* Estilo dinámico de confirmación de agregado */
+        .btn-carrito.agregado {
+            background: #25D366 !important;
+            color: white !important;
+        }
+        
         .badge {
             display: inline-block;
             background: rgba(200,164,93,0.15);
@@ -269,6 +302,96 @@
             align-self: flex-start;
             margin-bottom: 5px;
             border: 1px solid rgba(200,164,93,0.3);
+        }
+
+        /* SECCIÓN RESEÑAS / TESTIMONIOS CON CARRUSEL MÓVIL */
+        .testimonios-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        .testimonios-section h2 {
+            text-align: center;
+            color: #C8A45D;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .testimonios-section p.subtitulo {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        .carrusel-contenedor {
+            position: relative;
+            max-width: 320px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .carrusel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            width: 300%;
+        }
+        .tarjeta-testimonio {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 15px;
+            padding: 15px;
+            width: 100%;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .wrapper-captura {
+            width: 100%;
+            height: 380px;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: #000;
+        }
+        .wrapper-captura img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .wrapper-captura img:hover {
+            transform: scale(1.05);
+        }
+        .info-testimonio {
+            margin-top: 15px;
+        }
+        .estrellas {
+            color: #C8A45D;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .nombre-cliente {
+            font-weight: bold;
+            font-size: 14px;
+            color: #fff;
+        }
+        .carrusel-indicadores {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .punto {
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .punto.active {
+            background: #C8A45D;
+            width: 20px;
+            border-radius: 4px;
         }
 
         /* SECCIÓN PREGUNTAS FRECUENTES (FAQ) */
@@ -354,9 +477,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            text-decoration: none;
-            color: white;
             box-shadow: 0 4px 15px rgba(0,0,0,0.4);
             z-index: 999;
             transition: transform .3s;
@@ -364,8 +484,13 @@
         .whatsapp-float:hover {
             transform: scale(1.1);
         }
+        .whatsapp-float svg {
+            width: 34px;
+            height: 34px;
+            fill: white;
+        }
 
-        /* LATERALES DESPLEGABLES (CARRITO Y MENÚ UNIVERSAL) */
+        /* LATERALES DESPLEGABLES */
         .sidebar-cart, .mobile-menu-sidebar {
             position: fixed;
             top: 0;
@@ -466,13 +591,40 @@
             font-weight: bold;
             font-size: 13px;
         }
-        .btn-eliminar {
-            background: none;
-            border: none;
-            color: #ff4d4d;
-            cursor: pointer;
-            font-size: 13px;
+        
+        /* BOTONES DE CANTIDAD EN CARRITO */
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+        .btn-qty {
+            background: #222;
+            border: 1px solid #444;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .btn-qty:hover {
+            background: #C8A45D;
+            color: black;
+            border-color: #C8A45D;
+        }
+        .cart-item-qty {
+            font-size: 14px;
+            font-weight: bold;
+            min-width: 18px;
+            text-align: center;
+        }
+
         .cart-footer {
             padding: 20px;
             background: #000;
@@ -496,12 +648,24 @@
             border-color: #C8A45D;
             color: #C8A45D;
         }
+        .btn-vaciar {
+            background: #222;
+            color: #ff4d4d;
+            border: 1px solid #333;
+            margin-bottom: 10px;
+            font-size: 13px;
+            padding: 8px;
+        }
+        .btn-vaciar:hover {
+            background: #311;
+            border-color: #ff4d4d;
+        }
         .whatsapp {
             background: #25D366;
             color: white;
         }
 
-        /* LINKS INTERNOS DEL MENÚ DESPLEGABLE */
+        /* LINKS INTERNOS DEL MENÚ */
         .mobile-menu-links {
             display: flex;
             flex-direction: column;
@@ -536,10 +700,10 @@
             margin-bottom: 10px;
         }
 
-        /* RESPONSIVE */
+        /* RESPONSIVE Y ADAPTACIONES */
         @media (max-width: 768px) {
             .navbar { padding: 15px 20px; }
-            .logo { font-size: 20px; }
+            .logo img { height: 35px; }
             .hero h1 { font-size: 38px; }
             .hero p { font-size: 16px; }
             .sidebar-cart { width: 100%; right: -100%; }
@@ -553,6 +717,15 @@
             .btn { font-size: 13px; padding: 10px 5px; }
             .badge { font-size: 9px; padding: 2px 6px; }
             .genero-tag { font-size: 10px; margin-bottom: 5px; }
+            .notas-olfativas { display: none; }
+        }
+
+        @media (min-width: 769px) {
+            /* En monitores de PC el carrusel se desarma automáticamente para mostrar los 3 en fila fija */
+            .carrusel-contenedor { max-width: 100%; overflow: visible; }
+            .carrusel-track { transform: none !important; width: 100%; justify-content: center; gap: 30px; }
+            .carrusel-indicadores { display: none; }
+            .tarjeta-testimonio { width: 300px; }
         }
     </style>
 </head>
@@ -560,7 +733,7 @@
 
 <div class="promo-bar">🔥 ENVÍO GRATIS EN COMPRAS MAYORES A $100.000 🔥</div>
 
-<!-- PANEL DE NAVEGACIÓN UNIFICADO -->
+<!-- PANEL DE NAVEGACIÓN LATERAL -->
 <div class="mobile-menu-sidebar" id="mobile-menu-sidebar">
     <div class="mobile-menu-header">
         <h3 style="color:#C8A45D; margin:0; letter-spacing: 1px;">NAVEGACIÓN</h3>
@@ -569,6 +742,7 @@
     <ul class="mobile-menu-links">
         <li><a href="#inicio" onclick="toggleMobileMenu()">Inicio</a></li>
         <li><a href="#catalogo" onclick="toggleMobileMenu()">Catálogo de Fragancias</a></li>
+        <li><a href="#testimonios" onclick="toggleMobileMenu()">Clientes Contentos</a></li>
         <li><a href="#faq" onclick="toggleMobileMenu()">Preguntas Frecuentes</a></li>
         <li><a href="#contacto" onclick="toggleMobileMenu()">Contacto</a></li>
     </ul>
@@ -577,7 +751,9 @@
 <!-- NAV BAR FIJA -->
 <nav class="navbar">
     <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
-    <div class="logo">FRAGANCIAS LIKE</div>
+    <div class="logo">
+        <img src="logo.png" alt="FRAGANCIAS LIKE">
+    </div>
     <div class="menu-container">
         <div class="cart-icon-container" onclick="toggleCart()">
             🛒 <span class="cart-count" id="cart-count">0</span>
@@ -585,14 +761,13 @@
     </div>
 </nav>
 
-<!-- CARRITO LATERAL -->
+<!-- CARRITO LATERAL COMPLETO -->
 <div class="sidebar-cart" id="sidebar-cart">
     <div class="cart-header">
         <h2>Tu Carrito</h2>
         <span class="close-cart" onclick="toggleCart()">&times;</span>
     </div>
     
-    <!-- Barra de meta comercial -->
     <div class="envio-gratis-meta" id="envio-meta-contenedor">
         <span id="envio-meta-texto">¡Sumá productos para obtener envío gratis!</span>
         <div class="barra-progreso-bg">
@@ -600,19 +775,32 @@
         </div>
     </div>
 
+    <!-- Lista de Productos en el Carrito -->
     <div class="cart-items" id="cart-items-list"></div>
     
+    <!-- NUEVO FORMULARIO INTERNO DE DESPACHO -->
+    <div style="padding: 15px 20px; border-top: 1px solid #222; background: #111;">
+        <h4 style="margin: 0 0 10px 0; color: #C8A45D; font-size: 14px; letter-spacing: 0.5px;">DATOS DE ENTREGA</h4>
+        <input type="text" id="cliente-nombre" placeholder="Tu Nombre y Apellido" style="width:100%; padding: 10px; margin-bottom: 8px; background:#000; border:1px solid #333; color:white; border-radius:6px; box-sizing:border-box; outline:none;">
+        <input type="text" id="cliente-localidad" placeholder="Localidad / Provincia" style="width:100%; padding: 10px; margin-bottom: 8px; background:#000; border:1px solid #333; color:white; border-radius:6px; box-sizing:border-box; outline:none;">
+        <select id="cliente-entrega" style="width:100%; padding: 10px; background:#000; border:1px solid #333; color:white; border-radius:6px; box-sizing:border-box; outline:none;">
+            <option value="Envío a domicilio">Solicitar Envío a Domicilio</option>
+            <option value="Retiro en persona">Coordinar Retiro en Persona</option>
+        </select>
+    </div>
+
     <div class="cart-footer">
         <div class="cart-total">
             <span>Total:</span>
             <span id="cart-total">$0</span>
         </div>
+        <button class="btn btn-vaciar" onclick="vaciarCarrito()">🗑️ Vaciar Carrito</button>
         <button class="btn btn-seguir" onclick="toggleCart()">Seguir Comprando</button>
         <button class="btn whatsapp" id="btn-finalizar" onclick="finalizarCompra()">Finalizar Pedido por WhatsApp</button>
     </div>
 </div>
 
-<!-- HERO PORTADA -->
+<!-- HERO PRINCIPAL -->
 <section id="inicio" class="hero">
     <div>
         <h1>FRAGANCIAS LIKE</h1>
@@ -621,7 +809,7 @@
     </div>
 </section>
 
-<!-- CONTENEDOR DE BUSCADOR Y FILTROS -->
+<!-- BUSCADOR Y FILTROS -->
 <div id="catalogo" class="contenedor-herramientas">
     <div class="buscador-wrapper">
         <input type="text" class="buscador-input" id="buscador" onkeyup="filtrarCatalogo()" placeholder="Buscar perfume...">
@@ -633,94 +821,61 @@
     </div>
 </div>
 
-<!-- SECCIÓN PRODUCTOS -->
+<!-- CATÁLOGO DE PRODUCTOS -->
 <section class="productos" id="lista-productos">
-    <!-- Producto 1 -->
-    <div class="producto" data-nombre="invictus parfum" data-genero="hombre">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnMrUN95xQ8lBTmZ4YO3wa9SrhIqwEG4iljQ&s" alt="Invictus Parfum">
-        <div class="info">
-            <span class="badge">MÁS VENDIDO</span>
-            <span class="genero-tag">Hombre</span>
-            <h2>Invictus</h2>
-            <p class="precio">$45.000</p>
-            <div class="btn-box">
-                <button class="btn btn-carrito" onclick="agregarAlCarrito('Invictus Parfum', 45000)">Agregar al Carrito</button>
+</section>
+
+<!-- SECCIÓN TESTIMONIOS CON CARRUSEL AUTOMÁTICO -->
+<section id="testimonios" class="testimonios-section">
+    <h2>Clientes Contentos</h2>
+    <p class="subtitulo">Esto dicen quienes eligen Fragancias Like a diario</p>
+    
+    <div class="carrusel-contenedor">
+        <div class="carrusel-track" id="carrusel-track">
+            <!-- Testimonio 1 -->
+            <div class="tarjeta-testimonio">
+                <div class="wrapper-captura">
+                    <img src="resena1.png" alt="Opinión WhatsApp de cliente 1">
+                </div>
+                <div class="info-testimonio">
+                    <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                    <div class="nombre-cliente">Matias G.</div>
+                </div>
+            </div>
+
+            <!-- Testimonio 2 -->
+            <div class="tarjeta-testimonio">
+                <div class="wrapper-captura">
+                    <img src="resena2.png" alt="Opinión WhatsApp de cliente 2">
+                </div>
+                <div class="info-testimonio">
+                    <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                    <div class="nombre-cliente">Sofía R.</div>
+                </div>
+            </div>
+
+            <!-- Testimonio 3 -->
+            <div class="tarjeta-testimonio">
+                <div class="wrapper-captura">
+                    <img src="resena3.png" alt="Opinión WhatsApp de cliente 3">
+                </div>
+                <div class="info-testimonio">
+                    <div class="estrellas">⭐⭐⭐⭐⭐</div>
+                    <div class="nombre-cliente">Lucas P.</div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Producto 2 -->
-    <div class="producto" data-nombre="one million" data-genero="hombre">
-        <img src="https://media.falabella.com/falabellaCO/3827761_1/w=1500,h=1500,fit=cover" alt="One Million">
-        <div class="info">
-            <span class="badge">MÁS VENDIDO</span>
-            <span class="genero-tag">Hombre</span>
-            <h2>One Million</h2>
-            <p class="precio">$52.000</p>
-            <div class="btn-box">
-                <button class="btn btn-carrito" onclick="agregarAlCarrito('One Million', 52000)">Agregar al Carrito</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Producto 3 -->
-    <div class="producto" data-nombre="hawas her dorado" data-genero="mujer">
-        <img src="https://acdn-us.mitiendanube.com/stores/002/348/405/products/photoroom-20251126_133853-a45a8fff003647bc0f17641764269110-1024-1024.webp" alt="Hawas Her">
-        <div class="info">
-            <span class="badge">DESTACADO</span>
-            <span class="genero-tag">Mujer</span>
-            <h2>Hawas Her Dorado</h2>
-            <p class="precio">$55.000</p>
-            <div class="btn-box">
-                <button class="btn btn-carrito" onclick="agregarAlCarrito('Hawas Her Dorado', 55000)">Agregar al Carrito</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Producto 4 -->
-    <div class="producto" data-nombre="odyssey mandarine" data-genero="hombre">
-        <img src="https://perfumescardales.com.ar/wp-content/uploads/2024/01/mandarin-1.jpg" alt="Odyssey">
-        <div class="info">
-            <span class="badge">NUEVO</span>
-            <span class="genero-tag">Hombre</span>
-            <h2>Odyssey Mandarine</h2>
-            <p class="precio">$58.000</p>
-            <div class="btn-box">
-                <button class="btn btn-carrito" onclick="agregarAlCarrito('Odyssey Mandarine', 58000)">Agregar al Carrito</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Producto 5 -->
-    <div class="producto" data-nombre="9pm" data-genero="hombre">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSitlriwt1JHUMwavOp-yJNlba_5XTPa0vXUQ&s" alt="9PM">
-        <div class="info">
-            <span class="badge">PREMIUM</span>
-            <span class="genero-tag">Hombre</span>
-            <h2>9PM</h2>
-            <p class="precio">$50.000</p>
-            <div class="btn-box">
-                <button class="btn btn-carrito" onclick="agregarAlCarrito('9PM', 50000)">Agregar al Carrito</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Producto 6 -->
-    <div class="producto" data-nombre="the kingdom" data-genero="mujer">
-        <img src="https://cdn.v2.tiendanegocio.com/gallery/22278/img_22278_2u2lax7lyhm7xwfrsi.jpeg" alt="The Kingdom">
-        <div class="info">
-            <span class="badge">EXCLUSIVO</span>
-            <span class="genero-tag">Mujer</span>
-            <h2>The Kingdom</h2>
-            <p class="precio">$57.000</p>
-            <div class="btn-box">
-                <button class="btn btn-carrito" onclick="agregarAlCarrito('The Kingdom', 57000)">Agregar al Carrito</button>
-            </div>
+        
+        <!-- Puntos del Carrusel -->
+        <div class="carrusel-indicadores">
+            <span class="punto active" onclick="irAlSlide(0)"></span>
+            <span class="punto" onclick="irAlSlide(1)"></span>
+            <span class="punto" onclick="irAlSlide(2)"></span>
         </div>
     </div>
 </section>
 
-<!-- SECCIÓN PREGUNTAS FRECUENTES -->
+<!-- SECCIÓN PREGUNTAS FRECUENTES (FAQ) -->
 <section id="faq" class="faq-section">
     <h2>Preguntas Frecuentes</h2>
     
@@ -740,7 +895,7 @@
             <span class="faq-toggle-icon">▼</span>
         </div>
         <div class="faq-answer">
-            Coordinamos el pago de manera directa por WhatsApp. Podés abonar por transferencia bancaria o mediante un link de Mercado Pago que te enviamos al momento de cerrar el pedido.
+            Coordinamos todo el proceso de pago y entrega directamente por WhatsApp de forma personalizada para tu seguridad y comodidad.
         </div>
     </div>
 
@@ -755,7 +910,7 @@
     </div>
 </section>
 
-<!-- SECCIÓN SERVICIOS -->
+<!-- SECCIÓN ATRIBUTOS DE CONFIANZA -->
 <section class="confianza">
     <div class="item">
         <h3>Garantía de Calidad</h3>
@@ -775,10 +930,20 @@
 </footer>
 
 <!-- WHATSAPP FLOTANTE -->
-<a href="https://wa.me/5491173695934" class="whatsapp-float" target="_blank">💬</a>
+<a href="https://wa.me/5491173695934" class="whatsapp-float" target="_blank" aria-label="Contacto por WhatsApp">
+    <svg viewBox="0 0 448 512">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+    </svg>
+</a>
 
 <script>
-    var carrito = [];
+    // CONTROL DEL STORAGE GLOBAL
+    var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    
+    window.onload = function() {
+        actualizarCarritoUI();
+    };
+
     var filtroGeneroActual = 'todos';
 
     function toggleMobileMenu() {
@@ -826,7 +991,8 @@
         });
     }
 
-    function agregarAlCarrito(nombre, precio) {
+    // AGREGAR CON ANIMACIÓN Y FEEDBACK VISUAL
+    function agregarAlCarrito(nombre, precio, botonElemento) {
         var encontrado = false;
         for (var i = 0; i < carrito.length; i++) {
             if (carrito[i].nombre === nombre) {
@@ -836,13 +1002,44 @@
             }
         }
         if (!encontrado) {
-            carrito.push({ nombre: nombre, precio: precio, quantity: 1, cantidad: 1 });
+            carrito.push({ nombre: nombre, precio: precio, cantidad: 1 });
         }
-        actualizarCarritoUI();
+        
+        // Efecto visual rápido en el botón clickeado
+        if (botonElemento) {
+            botonElemento.innerHTML = "¡Agregado! ➕";
+            botonElemento.classList.add('agregado');
+            setTimeout(function() {
+                botonElemento.innerHTML = "Agregar al Carrito";
+                botonElemento.classList.remove('agregado');
+            }, 1200);
+        }
+
+        guardarYActualizar();
     }
 
-    function eliminarDelCarrito(nombre) {
-        carrito = carrito.filter(function(item) { return item.nombre !== nombre; });
+    function restarDelCarrito(nombre) {
+        for (var i = 0; i < carrito.length; i++) {
+            if (carrito[i].nombre === nombre) {
+                carrito[i].cantidad -= 1;
+                if (carrito[i].cantidad <= 0) {
+                    carrito = carrito.filter(function(item) { return item.nombre !== nombre; });
+                }
+                break;
+            }
+        }
+        guardarYActualizar();
+    }
+
+    function vaciarCarrito() {
+        if(confirm('¿Estás seguro de que querés vaciar tu carrito?')) {
+            carrito = [];
+            guardarYActualizar();
+        }
+    }
+
+    function guardarYActualizar() {
+        localStorage.setItem('carrito', JSON.stringify(carrito));
         actualizarCarritoUI();
     }
 
@@ -865,10 +1062,14 @@
 
             htmlContenido += '<div class="cart-item">' +
                 '<div class="cart-item-info">' +
-                    '<h4>' + item.nombre + ' (x' + item.cantidad + ')</h4>' +
+                    '<h4>' + item.nombre + '</h4>' +
                     '<p>$' + subtotalItem.toLocaleString('es-AR') + '</p>' +
                 '</div>' +
-                '<button class="btn-eliminar" onclick="eliminarDelCarrito(\'' + item.nombre + '\')">Quitar</button>' +
+                '<div class="cart-item-controls">' +
+                    '<button class="btn-qty" onclick="restarDelCarrito(\'' + item.nombre + '\')">−</button>' +
+                    '<span class="cart-item-qty">' + item.cantidad + '</span>' +
+                    '<button class="btn-qty" onclick="agregarAlCarrito(\'' + item.nombre + '\', ' + item.precio + ', null)">➕</button>' +
+                '</div>' +
             '</div>';
         }
 
@@ -890,29 +1091,116 @@
         }
     }
 
+    // FINALIZAR PROCESANDO EL NUEVO FORMULARIO AUTOMÁTICO
     function finalizarCompra() {
         if (carrito.length === 0) {
             alert('Tu carrito está vacío.');
             return;
         }
+
+        var nombreCliente = document.getElementById('cliente-nombre').value.trim();
+        var localidadCliente = document.getElementById('cliente-localidad').value.trim();
+        var metodoEntrega = document.getElementById('cliente-entrega').value;
+
+        if (!nombreCliente || !localidadCliente) {
+            alert('Por favor, completa tu Nombre y Localidad para procesar el pedido.');
+            return;
+        }
+
         var numeroWhatsApp = "5491173695934"; 
-        var texto = "Hola Fragancias Like! Me gustaría encargar los siguientes perfumes:\n\n";
-        var precioTotal = 0;
+        var texto = "🙌 *NUEVO PEDIDO - FRAGANCIAS LIKE*\n\n";
+        texto += "👤 *Cliente:* " + nombreCliente + "\n";
+        texto += "📍 *Localidad:* " + localidadCliente + "\n";
+        texto += "📦 *Modo:* " + metodoEntrega + "\n\n";
+        texto += "🛒 *Detalle del pedido:*\n";
         
+        var precioTotal = 0;
         for (var i = 0; i < carrito.length; i++) {
             var item = carrito[i];
-            texto += "• *" + item.nombre + "* (Cantidad: " + item.cantidad + ") - $" + (item.precio * item.cantidad).toLocaleString('es-AR') + "\n";
+            texto += "• " + item.cantidad + "x " + item.nombre + " ($" + (item.precio * item.cantidad).toLocaleString('es-AR') + ")\n";
             precioTotal += item.precio * item.cantidad;
         }
         
-        texto += "\n*Total de los perfumes:* $" + precioTotal.toLocaleString('es-AR') + "\n";
-        if(precioTotal >= 100000){
-            texto += "*Envío:* ¡GRATIS! 🔥\n";
+        texto += "\n💰 *Total Perfumes:* $" + precioTotal.toLocaleString('es-AR') + "\n";
+        if(precioTotal >= 100000 && metodoEntrega === "Envío a domicilio"){
+            texto += "🔥 *Envío:* ¡GRATIS!\n";
         }
-        texto += "\nQuedo atento para coordinar el pago y los datos del envío. ¡Muchas gracias!";
+        
+        texto += "\n_Hola! Me gustaría coordinar el pago de mi pedido._";
         
         window.open("https://wa.me/" + numeroWhatsApp + "?text=" + encodeURIComponent(texto), "_blank");
     }
+
+    // LÓGICA INTEGRADRA PARA EL CARRUSEL DE RESEÑAS
+    let slideActual = 0;
+    const totalSlides = 3;
+    const track = document.getElementById('carrusel-track');
+    const puntos = document.querySelectorAll('.punto');
+
+    function irAlSlide(index) {
+        if (window.innerWidth > 768) return; 
+        slideActual = index;
+        track.style.transform = `translateX(-${slideActual * (100 / totalSlides)}%)`;
+        
+        puntos.forEach((p, i) => {
+            if(i === slideActual) p.classList.add('active');
+            else p.classList.remove('active');
+        });
+    }
+
+    setInterval(() => {
+        if (window.innerWidth <= 768) {
+            slideActual = (slideActual + 1) % totalSlides;
+            irAlSlide(slideActual);
+        }
+    }, 4000);
+</script>
+<script>
+    const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtH8U-YBPAs8iE9IrHQCpDr6gDxDezzkhKVfXqxxNzRn2pcHyrxKfNW4lIfoIig-8KlLtfstKF31Eo/pub?gid=1201638382&single=true&output=csv';
+
+    async function cargarProductos() {
+        try {
+            const res = await fetch(SPREADSHEET_URL);
+            const data = await res.text();
+            const filas = data.split('\n').slice(1); // Ignora el encabezado
+            const contenedor = document.getElementById('lista-productos');
+            contenedor.innerHTML = '';
+
+            filas.forEach(fila => {
+                if(!fila.trim()) return;
+                const c = fila.split(',');
+                // Estructura: 0:Nombre, 1:Precio, 2:Genero, 3:Notas, 4:Imagen, 5:Badge, 6:Stock
+                const stock = parseInt(c[6]);
+                
+                const div = document.createElement('div');
+                div.className = 'producto';
+                div.innerHTML = `
+                    <img src="${c[4]}" alt="${c[0]}" loading="lazy">
+                    <div class="info">
+                        ${c[5] ? `<span class="badge">${c[5]}</span>` : ''}
+                        <div class="genero-tag"><span>${c[2]}</span> <span class="ml-tag">100ml</span></div>
+                        <h2>${c[0]}</h2>
+                        <p class="notas-olfativas">${c[3]}</p>
+                        <p class="precio">$${parseInt(c[1]).toLocaleString('es-AR')}</p>
+                        <div class="btn-box">
+                            <button class="btn btn-carrito" 
+                                    ${stock <= 0 ? 'disabled style="background:#555"' : ''}
+                                    onclick="agregarAlCarrito('${c[0]}', ${c[1]}, this)">
+                                ${stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+                contenedor.appendChild(div);
+            });
+        } catch(err) {
+            console.error("Error al cargar:", err);
+        }
+    }
+    
+    // Llamar a la función al cargar la página
+    document.addEventListener('DOMContentLoaded', cargarProductos);
+
 </script>
 </body>
 </html>
