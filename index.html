@@ -1144,13 +1144,13 @@
                 if(!fila.trim()) return;
                 const c = fila.split(',');
                 
-                // Mapeo corregido según tu imagen (Columna B es índice 1)
-                const nombre = c[1];   
-                const genero = c[2];   
-                const notas = c[3];    
-                const precio = parseInt(c[4]) || 0; 
-                const stock = parseInt(c[5]) || 0;  
-                const imagen = c[7];   
+                // Mapeo corregido según las columnas reales de tu hoja:
+                const nombre = c[1];   // Columna B
+                const genero = c[2];   // Columna C
+                const notas = c[3];    // Columna D
+                const precio = parseInt(c[4]) || 0; // Columna E
+                const stock = parseInt(c[5]) || 0;  // Columna F
+                const imagen = c[7];   // Columna H
 
                 const div = document.createElement('div');
                 div.className = 'producto';
@@ -1177,7 +1177,7 @@
         }
     }
 
-    // Inicializar al cargar
+    // Asegurar que corra al cargar la página
     document.addEventListener('DOMContentLoaded', cargarProductos);
 
 </script>
