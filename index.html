@@ -1127,7 +1127,7 @@
     let filtroGeneroActual = 'todos';
 </script>
 <script>
-    // Definir la variable una sola vez
+    // Asegúrate de que esta sea la ÚNICA vez que defines la URL
     const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtH8U-YBPAs8iE9IrHQCpDr6gDxDezzkhKVfXqxxNzRn2pcHyrxKfNW4lIfoIig-8KlLtfstKF31Eo/pub?gid=1201638382&single=true&output=csv';
 
     async function cargarProductos() {
@@ -1136,7 +1136,6 @@
             const data = await res.text();
             const filas = data.split('\n').slice(1);
             const contenedor = document.getElementById('lista-productos');
-            
             if (!contenedor) return;
             contenedor.innerHTML = ''; 
 
@@ -1144,13 +1143,14 @@
                 if(!fila.trim()) return;
                 const c = fila.split(',');
                 
-                // Mapeo corregido según las columnas reales de tu hoja:
-                const nombre = c[1];   // Columna B
-                const genero = c[2];   // Columna C
-                const notas = c[3];    // Columna D
-                const precio = parseInt(c[4]) || 0; // Columna E
-                const stock = parseInt(c[5]) || 0;  // Columna F
-                const imagen = c[7];   // Columna H
+                // Limpieza de precio: quitamos '$', puntos y comas para que solo quede el número
+                let precioBruto = c[4] ? c[4].replace(/[\$\.]/g, '').replace(',', '.') : "0";
+                const nombre = c[1];
+                const genero = c[2];
+                const notas = c[3];
+                const precio = parseFloat(precioBruto) || 0; 
+                const stock = parseInt(c[5]) || 0;
+                const imagen = c[7];
 
                 const div = document.createElement('div');
                 div.className = 'producto';
@@ -1164,7 +1164,7 @@
                         <div class="btn-box">
                             <button class="btn btn-carrito" 
                                     ${stock <= 0 ? 'disabled style="background:#555"' : ''}
-                                    onclick="agregarAlCarrito('${nombre}', ${precio}, this)">
+                                    onclick="agregarAlCarrito('${nombre.replace(/'/g, "\\'")}', ${precio}, this)">
                                 ${stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
                             </button>
                         </div>
@@ -1177,7 +1177,7 @@
         }
     }
 
-    // Asegurar que corra al cargar la página
+    // Ejecutar una sola vez al cargar
     document.addEventListener('DOMContentLoaded', cargarProductos);
 
 </script>
