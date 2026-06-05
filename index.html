@@ -1158,45 +1158,53 @@
 <script>
     const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtH8U-YBPAs8iE9IrHQCpDr6gDxDezzkhKVfXqxxNzRn2pcHyrxKfNW4lIfoIig-8KlLtfstKF31Eo/pub?gid=1201638382&single=true&output=csv';
 
-    async function cargarProductos() {
-        try {
-            const res = await fetch(SPREADSHEET_URL);
-            const data = await res.text();
-            const filas = data.split('\n').slice(1); // Ignora el encabezado
-            const contenedor = document.getElementById('lista-productos');
-            contenedor.innerHTML = '';
+  async function cargarProductos() {
+    const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtH8U-YBPAs8iE9IrHQCpDr6gDxDezzkhKVfXqxxNzRn2pcHyrxKfNW4lIfoIig-8KlLtfstKF31Eo/pub?gid=1201638382&single=true&output=csv';
 
-            filas.forEach(fila => {
-                if(!fila.trim()) return;
-                const c = fila.split(',');
-                // Estructura: 0:Nombre, 1:Precio, 2:Genero, 3:Notas, 4:Imagen, 5:Badge, 6:Stock
-                const stock = parseInt(c[6]);
-                
-                const div = document.createElement('div');
-                div.className = 'producto';
-                div.innerHTML = `
-                    <img src="${c[4]}" alt="${c[0]}" loading="lazy">
-                    <div class="info">
-                        ${c[5] ? `<span class="badge">${c[5]}</span>` : ''}
-                        <div class="genero-tag"><span>${c[2]}</span> <span class="ml-tag">100ml</span></div>
-                        <h2>${c[0]}</h2>
-                        <p class="notas-olfativas">${c[3]}</p>
-                        <p class="precio">$${parseInt(c[1]).toLocaleString('es-AR')}</p>
-                        <div class="btn-box">
-                            <button class="btn btn-carrito" 
-                                    ${stock <= 0 ? 'disabled style="background:#555"' : ''}
-                                    onclick="agregarAlCarrito('${c[0]}', ${c[1]}, this)">
-                                ${stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
-                            </button>
-                        </div>
+    try {
+        const res = await fetch(SPREADSHEET_URL);
+        const data = await res.text();
+        // Usamos una expresión regular para manejar comas dentro de textos (por si tus notas tienen comas)
+        const filas = data.split('\n').slice(1);
+        const contenedor = document.getElementById('lista-productos');
+        contenedor.innerHTML = '';
+
+        filas.forEach(fila => {
+            if(!fila.trim()) return;
+            
+            // Separamos por coma, pero asegurando que extraemos valores limpios
+            const c = fila.split(',');
+            
+            // LIMPIEZA DE DATOS:
+            // .replace(/[^\d]/g, '') quita todo lo que no sea número (símbolos $, puntos, etc)
+            const precio = parseInt(c[1].replace(/[^\d]/g, '')) || 0;
+            const stock = parseInt(c[6].replace(/[^\d]/g, '')) || 0;
+
+            const div = document.createElement('div');
+            div.className = 'producto';
+            div.innerHTML = `
+                <img src="${c[4]}" alt="${c[0]}" loading="lazy">
+                <div class="info">
+                    ${c[5] ? `<span class="badge">${c[5]}</span>` : ''}
+                    <div class="genero-tag"><span>${c[2]}</span> <span class="ml-tag">100ml</span></div>
+                    <h2>${c[0]}</h2>
+                    <p class="notas-olfativas">${c[3]}</p>
+                    <p class="precio">$${precio.toLocaleString('es-AR')}</p>
+                    <div class="btn-box">
+                        <button class="btn btn-carrito" 
+                                ${stock <= 0 ? 'disabled style="background:#555"' : ''}
+                                onclick="agregarAlCarrito('${c[0]}', ${precio}, this)">
+                            ${stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
+                        </button>
                     </div>
-                `;
-                contenedor.appendChild(div);
-            });
-        } catch(err) {
-            console.error("Error al cargar:", err);
-        }
+                </div>
+            `;
+            contenedor.appendChild(div);
+        });
+    } catch(err) {
+        console.error("Error al cargar:", err);
     }
+}
     
     // Llamar a la función al cargar la página
     document.addEventListener('DOMContentLoaded', cargarProductos);
