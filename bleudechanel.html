@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bleu de Chanel - FRAGANCIAS LIKE</title>
+    <!-- Iconos y Tipografías Premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --dorado: #C8A45D;
+            --dorado-apagado: #a38446;
+            --oscuro-bg: #050505;
+            --tarjeta-bg: #0d0d0d;
+            --borde: #1a1a1a;
+            --texto-gris: #aaaaaa;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--oscuro-bg);
+            color: white;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: #000000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 80px;
+            border-bottom: 1px solid var(--borde);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-nav {
+            font-family: 'Cinzel', serif; 
+            color: var(--dorado); 
+            font-size: 22px; 
+            font-weight: bold; 
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+        .menu {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: .3s;
+        }
+        .menu a:hover {
+            color: var(--dorado);
+        }
+
+        /* --- DETALLE DE PRODUCTO --- */
+        .container-detalle {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .producto-galeria {
+            background: linear-gradient(to bottom, #121212, #080808);
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 450px;
+        }
+
+        .producto-galeria img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        .producto-info h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            letter-spacing: 3px;
+            color: var(--dorado);
+            margin: 0 0 10px 0;
+        }
+
+        .producto-info .subtitulo {
+            font-size: 14px;
+            color: var(--texto-gris);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .producto-info .precio {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .notas-olfativas {
+            background: #0d0d0d;
+            border: 1px solid var(--borde);
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 35px;
+        }
+
+        .notas-olfativas h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--dorado);
+            font-size: 16px;
+            margin: 0 0 15px 0;
+            letter-spacing: 1px;
+        }
+
+        .nota-item {
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .nota-item strong {
+            color: var(--dorado);
+            font-weight: 600;
+        }
+
+        .botones-compra {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-accion {
+            flex: 1;
+            padding: 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: .3s;
+        }
+
+        .btn-accion.wa { background: #25D366; color: white; }
+        .btn-accion.wa:hover { background: #1ebd59; transform: translateY(-2px); }
+
+        .btn-accion.mp { background: #009EE3; color: white; }
+        .btn-accion.mp:hover { background: #008cd1; transform: translateY(-2px); }
+
+        .btn-volver {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--texto-gris);
+            text-decoration: none;
+            font-size: 13px;
+            transition: .3s;
+        }
+        .btn-volver:hover { color: var(--dorado); }
+
+        @media (max-width: 768px) {
+            .container-detalle { grid-template-columns: 1fr; gap: 30px; margin: 20px auto; }
+            .producto-galeria { height: 300px; }
+            .botones-compra { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="logo-nav">FRAGANCIAS LIKE</a>
+    <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="index.html#showroom">Showroom</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<main class="container-detalle">
+    <div class="producto-galeria">
+        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600" alt="Bleu de Chanel">
+    </div>
+
+    <div class="producto-info">
+        <a href="index.html" class="btn-volver"><i class="fa-solid fa-arrow-left"></i> Volver al inicio</a>
+        <h1 style="margin-top: 15px;">BLEU DE CHANEL</h1>
+        <div class="subtitulo">Eau de Parfum | Masculino (100ml)</div>
+        <div class="precio">$63.000</div>
+
+        <div class="notas-olfativas">
+            <h3>Notas Olfativas</h3>
+            <div class="nota-item"><strong>Notas de Salida:</strong> Toronja (pomelo), limón (lima ácida), menta y pimienta rosa.</div>
+            <div class="nota-item"><strong>Notas de Corazón:</strong> Jengibre, nuez moscada, jazmín y Iso E Super.</div>
+            <div class="nota-item"><strong>Notas de Fondo:</strong> Incienso, sándalo, cedro, pachulí, sándalo y ládano.</div>
+        </div>
+
+        <div class="botones-compra">
+            <a class="btn-accion wa" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20Bleu%20de%20Chanel" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> Comprar por WhatsApp
+            </a>
+            <a class="btn-accion mp" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">
+                <i class="fa-solid fa-credit-card"></i> Pagar con Mercado Pago
+            </a>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
