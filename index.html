@@ -3,10 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Tienda</title>
+    <title>FRAGANCIAS LIKE - Inicio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #050505, #111, #050505);
+            color: white;
+        }
+        .navbar {
+            background: #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            border-bottom: 1px solid #222;
+        }
+        .logo {
+            color: #C8A45D;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .menu a:hover {
+            color: #C8A45D;
+        }
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(rgba(0,0,0,.65), rgba(0,0,0,.65)), url('https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=1600');
+            background-size: cover;
+            background-position: center;
+        }
+        .hero h1 {
+            font-size: 70px;
+            margin: 0;
+            color: #C8A45D;
+            text-shadow: 0 0 20px rgba(0,0,0,.5);
+        }
+        .hero p {
+            font-size: 22px;
+            color: #f1f1f1;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+        .beneficios {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .btn-principal {
+            background: #C8A45D;
+            color: #000;
+            padding: 16px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            transition: .3s;
+        }
+        .btn-principal:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Sección de Destacados */
+        .seccion-destacados {
+            text-align: center;
+            padding: 60px 20px 30px 20px;
+        }
+        .seccion-destacados h2 {
+            color: #C8A45D;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .seccion-destacados p {
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+        .productos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 10px;
+        }
+        .producto {
+            background: #1b1b1b;
+            width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 10px 30px rgba(0,0,0,.4);
+            transition: all .3s ease;
+            text-align: left;
+        }
+        .producto:hover {
+            transform: translateY(-8px);
+            border-color: #C8A45D;
+            box-shadow: 0 15px 35px rgba(200,164,93,.25);
+        }
+        .producto img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .info {
+            padding: 15px;
+        }
+        .badge {
+            display: inline-block;
+            background: #C8A45D;
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .precio {
+            font-size: 28px;
+            font-weight: bold;
+            color: #C8A45D;
+            margin: 15px 0;
+        }
+        .btn {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .whatsapp { background: #25D366; }
+        .mercadopago { background: #009EE3; }
+        
+        .contenedor-ver-mas {
+            margin: 40px 0;
+        }
+        .btn-ver-mas {
+            background: transparent;
+            color: #C8A45D;
+            border: 2px solid #C8A45D;
+            padding: 12px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            transition: .3s;
+        }
+        .btn-ver-mas:hover {
+            background: #C8A45D;
+            color: #000;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 65px;
+            height: 65px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,.4);
+            z-index: 999;
+        }
+        .confianza {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 60px 30px;
+            flex-wrap: wrap;
+        }
+        .item {
+            background: #1b1b1b;
+            padding: 25px;
+            width: 280px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .item h3 { color: #C8A45D; }
+        
+        .resenas {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .resenas h2 {
+            color: #C8A45D;
+            margin-bottom: 40px;
+        }
+        .review {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #1b1b1b;
+            padding: 25px;
+            border-radius: 15px;
+        }
+        footer {
+            background: #000;
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 1px solid #222;
+            color: #aaa;
+        }
+        footer h3 { color: #C8A45D; margin-bottom: 10px; }
+        footer p { margin: 5px 0; }
+        
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 20px; }
+            .menu { flex-wrap: wrap; justify-content: center; padding: 0; gap: 15px; }
+            .hero h1 { font-size: 45px; }
+            .hero p { font-size: 18px; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a mi tienda online</h1>
-    <p>Próximamente productos disponibles.</p>
+
+<nav class="navbar">
+    <div class="logo">FRAGANCIAS LIKE</div>
+    <ul class="menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="#resenas">Reseñas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<section id="inicio" class="hero">
+    <div class="hero-text">
+        <h1>FRAGANCIAS LIKE</h1>
+        <p>Perfumes originales y equivalencias premium</p>
+        <div class="beneficios">
+            <span>✓ Envíos a todo el país</span>
+            <span>✓ Hasta 6 cuotas</span>
+            <span>✓ Compra segura</span>
+        </div>
+        <a href="catalogo.html" class="btn-principal">VER CATÁLOGO</a>
+    </div>
+</section>
+
+<!-- SECCIÓN DE LOS MEJORES PERFUMES (SOLO 3) -->
+<section id="ofertas" class="seccion-destacados">
+    <h2>🔥 FRAGANCIAS DESTACADAS</h2>
+    <p>Nuestras elecciones premium más vendidas de esta semana.</p>
+
+    <div class="productos">
+        <!-- Producto 1 -->
+        <div class="producto">
+            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800" alt="Perfume Invictus">
+            <div class="info">
+                <span class="badge">RECOMENDADO</span>
+                <h2>Invictus</h2>
+                <p class="precio">$45.000</p>
+                <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20Invictus" target="_blank">Comprar por WhatsApp</a>
+                <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+            </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="producto">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800" alt="Perfume One Million">
+            <div class="info">
+                <span class="badge">MÁS VENDIDO</span>
+                <h2>One Million</h2>
+                <p class="precio">$52.000</p>
+                <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20One%20Million" target="_blank">Comprar por WhatsApp</a>
+                <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+            </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="producto">
+            <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=800" alt="Perfume Hawas Her Dorado">
+            <div class="info">
+                <span class="badge">MÁS VENDIDO</span>
+                <h2>HAWAS HER DORADO</h2>
+                <p class="precio">$55.000</p>
+                <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20HAWAS%20HER%20DORADO" target="_blank">Comprar por WhatsApp</a>
+                <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÓN PARA IR AL CATÁLOGO COMPLETO -->
+    <div class="contenedor-ver-mas">
+        <a href="catalogo.html" class="btn-ver-mas">Ver catálogo completo →</a>
+    </div>
+</section>
+
+<section class="confianza">
+    <div class="item">
+        <h3>✓ Compra Segura</h3>
+        <p>Pagá con Mercado Pago de forma protegida.</p>
+    </div>
+    <div class="item">
+        <h3>✓ Envíos a Todo el País</h3>
+        <p>Recibí tu perfume donde estés.</p>
+    </div>
+    <div class="item">
+        <h3>✓ Atención Personalizada</h3>
+        <p>Te ayudamos a elegir la mejor fragancia.</p>
+    </div>
+</section>
+
+<section id="resenas" class="resenas">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <div class="review">
+        <p>★★★★★</p>
+        <p>"Excelente atención y el perfume duró muchísimo."</p>
+        <p><strong>- Tomás R.</strong></p>
+    </div>
+    <div class="review">
+        <p>★★★★★</p>
+        <p>"Llegó rápido y muy bien presentado."</p>
+        <p><strong>- Sofía M.</strong></p>
+    </div>
+</section>
+
+<footer id="contacto">
+    <h3>FRAGANCIAS LIKE</h3>
+    <p>Perfumes originales y equivalencias premium.</p>
+    <p>WhatsApp: +54 9 11 7369-5934</p>
+    <p>© 2026 Todos los derechos reservados.</p>
+</footer>
+
+<a href="https://wa.me/5491173695934" class="whatsapp-float" target="_blank">💬</a>
+
 </body>
 </html>

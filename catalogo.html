@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - FRAGANCIAS LIKE</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #050505, #111, #050505);
+            color: white;
+        }
+        .navbar {
+            background: #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            border-bottom: 1px solid #222;
+        }
+        .logo {
+            color: #C8A45D;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+        .menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .menu a:hover {
+            color: #C8A45D;
+        }
+        .elegirnos {
+            text-align: center;
+            padding: 50px 20px 20px 20px;
+        }
+        .elegirnos h2 {
+            color: #C8A45D;
+            margin-bottom: 20px;
+        }
+        .elegirnos p {
+            max-width: 700px;
+            margin: auto;
+            color: #ccc;
+        }
+        .productos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 30px;
+            padding-bottom: 80px;
+        }
+        .producto {
+            background: #1b1b1b;
+            width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 10px 30px rgba(0,0,0,.4);
+            transition: all .3s ease;
+        }
+        .producto:hover {
+            transform: translateY(-8px);
+            border-color: #C8A45D;
+            box-shadow: 0 15px 35px rgba(200,164,93,.25);
+        }
+        .producto img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .info {
+            padding: 15px;
+        }
+        .badge {
+            display: inline-block;
+            background: #C8A45D;
+            color: #000;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .precio {
+            font-size: 28px;
+            font-weight: bold;
+            color: #C8A45D;
+            margin: 15px 0;
+        }
+        .btn {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        .whatsapp { background: #25D366; }
+        .mercadopago { background: #009EE3; }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 65px;
+            height: 65px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,.4);
+            z-index: 999;
+        }
+        footer {
+            background: #000;
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 1px solid #222;
+            color: #aaa;
+        }
+        footer h3 { color: #C8A45D; margin-bottom: 10px; }
+        footer p { margin: 5px 0; }
+        
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 20px; }
+            .menu { flex-wrap: wrap; justify-content: center; padding: 0; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">FRAGANCIAS LIKE</a>
+    <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="catalogo.html" style="color: #C8A45D;">Catálogo</a></li>
+        <li><a href="index.html#resenas">Reseñas</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<section class="elegirnos">
+    <h2>🔥 NUESTRO CATÁLOGO</h2>
+    <p>Descubrí nuestras fragancias más vendidas y promociones especiales.</p>
+</section>
+
+<section class="productos">
+
+    <!-- Producto 1 -->
+    <div class="producto">
+        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800" alt="Perfume Invictus">
+        <div class="info">
+            <span class="badge">MÁS VENDIDO</span>
+            <h2>Invictus</h2>
+            <p class="precio">$45.000</p>
+            <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20Invictus" target="_blank">Comprar por WhatsApp</a>
+            <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+        </div>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="producto">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800" alt="Perfume One Million">
+        <div class="info">
+            <span class="badge">MÁS VENDIDO</span>
+            <h2>One Million</h2>
+            <p class="precio">$52.000</p>
+            <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20One%20Million" target="_blank">Comprar por WhatsApp</a>
+            <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+        </div>
+    </div>
+
+    <!-- Producto 3 -->
+    <div class="producto">
+        <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=800" alt="Perfume Hawas Her Dorado">
+        <div class="info">
+            <span class="badge">MÁS VENDIDO</span>
+            <h2>HAWAS HER DORADO</h2>
+            <p class="precio">$55.000</p>
+            <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20HAWAS%20HER%20DORADO" target="_blank">Comprar por WhatsApp</a>
+            <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+        </div>
+    </div>
+
+    <!-- Producto 4 -->
+    <div class="producto">
+        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800" alt="Perfume Odyssey Mandarine">
+        <div class="info">
+            <span class="badge">MÁS VENDIDO</span>
+            <h2>ODYSSEY MANDARINE</h2>
+            <p class="precio">$58.000</p>
+            <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20ODYSSEY%20MANDARINE" target="_blank">Comprar por WhatsApp</a>
+            <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+        </div>
+    </div>
+
+    <!-- Producto 5 -->
+    <div class="producto">
+        <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800" alt="Perfume 9PM">
+        <div class="info">
+            <span class="badge">MÁS VENDIDO</span>
+            <h2>9PM</h2>
+            <p class="precio">$50.000</p>
+            <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%209PM" target="_blank">Comprar por WhatsApp</a>
+            <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+        </div>
+    </div>
+
+    <!-- Producto 6 -->
+    <div class="producto">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800" alt="Perfume The Kingdom">
+        <div class="info">
+            <span class="badge">MÁS VENDIDO</span>
+            <h2>THE KINGDOM</h2>
+            <p class="precio">$57.000</p>
+            <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20THE%20KINGDOM" target="_blank">Comprar por WhatsApp</a>
+            <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+        </div>
+    </div>
+
+    <!-- Producto 7 -->
+    <div class="producto">
+        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800" alt="Perfume Liquid Brun">
+        <div class="info">
+            <span class="badge">MÁS VENDIDO</span>
+            <h2>LIQUID BRUN</h2>
+            <p class="precio">$60.000</p>
+            <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20LIQUID%20BRUN" target="_blank">Comprar por WhatsApp</a>
+            <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+        </div>
+    </div>
+
+    <!-- Producto 8 -->
+    <div class="producto">
+        <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=800" alt="Perfume Hawas Tropical">
+        <div class="info">
+            <span class="badge">MÁS VENDIDO</span>
+            <h2>HAWAS TROPICAL</h2>
+            <p class="precio">$56.000</p>
+            <a class="btn whatsapp" href="https://wa.me/5491173695934?text=Hola,%20quiero%20comprar%20HAWAS%20TROPICAL" target="_blank">Comprar por WhatsApp</a>
+            <a class="btn mercadopago" href="https://link.mercadopago.com.ar/matiasarganaraz" target="_blank">Pagar con Mercado Pago</a>
+        </div>
+    </div>
+
+</section>
+
+<footer id="contacto">
+    <h3>FRAGANCIAS LIKE</h3>
+    <p>Perfumes originales y equivalencias premium.</p>
+    <p>WhatsApp: +54 9 11 7369-5934</p>
+    <p>© 2026 Todos los derechos reservados.</p>
+</footer>
+
+<a href="https://wa.me/5491173695934" class="whatsapp-float" target="_blank">💬</a>
+
+</body>
+</html>
